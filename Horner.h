@@ -68,16 +68,16 @@ namespace utl {
   template<typename Float> struct Polynomial<Float, _Tag_, _i_> { static Float Coeff(const Float y) { return Float(_c_y_); } }
 
 
-#define HORNER0(F, x, c0)                                                (F)(c0)
-#define HORNER1(F, x, c1, c0)                                 HORNER0(F, x, (F)(c1)*(x) + (F)(c0)                                )
-#define HORNER2(F, x, c2, c1, c0)                             HORNER1(F, x, (F)(c2)*(x) + (F)(c1),                             c0)
-#define HORNER3(F, x, c3, c2, c1, c0)                         HORNER2(F, x, (F)(c3)*(x) + (F)(c2),                         c1, c0)
-#define HORNER4(F, x, c4, c3, c2, c1, c0)                     HORNER3(F, x, (F)(c4)*(x) + (F)(c3),                     c2, c1, c0)
-#define HORNER5(F, x, c5, c4, c3, c2, c1, c0)                 HORNER4(F, x, (F)(c5)*(x) + (F)(c4),                 c3, c2, c1, c0)
-#define HORNER6(F, x, c6, c5, c4, c3, c2, c1, c0)             HORNER5(F, x, (F)(c6)*(x) + (F)(c5),             c4, c3, c2, c1, c0)
-#define HORNER7(F, x, c7, c6, c5, c4, c3, c2, c1, c0)         HORNER6(F, x, (F)(c7)*(x) + (F)(c6),         c5, c4, c3, c2, c1, c0)
-#define HORNER8(F, x, c8, c7, c6, c5, c4, c3, c2, c1, c0)     HORNER7(F, x, (F)(c8)*(x) + (F)(c7),     c6, c5, c4, c3, c2, c1, c0)
-#define HORNER9(F, x, c9, c8, c7, c6, c5, c4, c3, c2, c1, c0) HORNER8(F, x, (F)(c9)*(x) + (F)(c8), c7, c6, c5, c4, c3, c2, c1, c0)
+#define HORNER0(F, x, c0)                                                F(c0)
+#define HORNER1(F, x, c1, c0)                                 HORNER0(F, x, F(c1)*(x) + F(c0)                                )
+#define HORNER2(F, x, c2, c1, c0)                             HORNER1(F, x, F(c2)*(x) + F(c1),                             c0)
+#define HORNER3(F, x, c3, c2, c1, c0)                         HORNER2(F, x, F(c3)*(x) + F(c2),                         c1, c0)
+#define HORNER4(F, x, c4, c3, c2, c1, c0)                     HORNER3(F, x, F(c4)*(x) + F(c3),                     c2, c1, c0)
+#define HORNER5(F, x, c5, c4, c3, c2, c1, c0)                 HORNER4(F, x, F(c5)*(x) + F(c4),                 c3, c2, c1, c0)
+#define HORNER6(F, x, c6, c5, c4, c3, c2, c1, c0)             HORNER5(F, x, F(c6)*(x) + F(c5),             c4, c3, c2, c1, c0)
+#define HORNER7(F, x, c7, c6, c5, c4, c3, c2, c1, c0)         HORNER6(F, x, F(c7)*(x) + F(c6),         c5, c4, c3, c2, c1, c0)
+#define HORNER8(F, x, c8, c7, c6, c5, c4, c3, c2, c1, c0)     HORNER7(F, x, F(c8)*(x) + F(c7),     c6, c5, c4, c3, c2, c1, c0)
+#define HORNER9(F, x, c9, c8, c7, c6, c5, c4, c3, c2, c1, c0) HORNER8(F, x, F(c9)*(x) + F(c8), c7, c6, c5, c4, c3, c2, c1, c0)
 
 }
 
