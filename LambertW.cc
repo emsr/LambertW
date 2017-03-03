@@ -39,6 +39,9 @@ using namespace std;
 
 namespace utl {
 
+  constexpr long double m_e
+    = 2.718281828459045235360287471352662497759L;
+
   class BranchPoint { };
   HORNER_COEFF(BranchPoint,  0, -1);
   HORNER_COEFF(BranchPoint,  1,  1);
@@ -123,7 +126,7 @@ namespace utl {
   public:
     template<int order>
     static Float BranchPointExpansion(const Float x)
-    { return Horner<Float, BranchPoint, order>::Eval(eSign * sqrt(2*(Float(M_E)*x+1))); }
+    { return Horner<Float, BranchPoint, order>::Eval(eSign * sqrt(2*(Float(m_e)*x+1))); }
 
     // Asymptotic expansion: Corless et al. 1996, de Bruijn (1981)
     template<int order>
