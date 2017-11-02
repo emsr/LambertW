@@ -15,8 +15,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-CPPFLAGS := -I.
+CXX = $(HOME)/bin/bin/g++
+CPPFLAGS := -I. -std=c++17
 #CXXFLAGS := -Wall -Wextra -ggdb3 -O0 -fno-inline -pipe
 CXXFLAGS := -O2
 #CXXFLAGS := -Wall -Wextra -ggdb3 -O2 -pipe

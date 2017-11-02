@@ -20,52 +20,90 @@
 #ifndef _utl_Horner_h_
 #define _utl_Horner_h_
 
+#include "horner.h"
 
 namespace utl {
 
-  template<typename Float, class Tag, unsigned int order>
-  struct Polynomial {
-    static inline Float Coeff();
-    static inline Float Coeff(const Float x);
-  };
+  template<typename Float, class Tag, unsigned int Order>
+    struct Polynomial
+    {
+      static inline Float
+      Coeff();
+
+      static inline Float
+      Coeff(const Float x);
+    };
 
 
-  template<typename Float, class Tag, unsigned int order>
-  struct Horner {
-    static Float Recurse(const Float term, const Float x)
-    { return Horner<Float, Tag, order-1>::Recurse(term*x + Polynomial<Float, Tag, order>::Coeff(), x); }
-    static Float RecurseAlt(const Float term, const Float x)
-    { return Horner<Float, Tag, order-1>::RecurseAlt(Polynomial<Float, Tag, order>::Coeff() + x*term, x); }
-    static Float Eval(const Float x)
-    { return Horner<Float, Tag, order-1>::Recurse(Polynomial<Float, Tag, order>::Coeff(), x); }
-    static Float EvalAlt(const Float x)
-    { return Horner<Float, Tag, order-1>::RecurseAlt(Polynomial<Float, Tag, order>::Coeff(), x); }
-    //
-    static Float Recurse(const Float term, const Float x, const Float y)
-    { return Horner<Float, Tag, order-1>::Recurse(term*x + Polynomial<Float, Tag, order>::Coeff(y), x, y); }
-    static Float Eval(const Float x, const Float y)
-    { return Horner<Float, Tag, order-1>::Recurse(Polynomial<Float, Tag, order>::Coeff(y), x, y); }
-  };
+  template<typename Float, class Tag, unsigned int Order>
+    struct Horner
+    {
+      static Float
+      Recurse(const Float term, const Float x)
+      { return Horner<Float, Tag, Order - 1>::Recurse(term*x + Polynomial<Float, Tag, Order>::Coeff(), x); }
+
+      static Float
+      RecurseAlt(const Float term, const Float x)
+      { return Horner<Float, Tag, Order - 1>::RecurseAlt(Polynomial<Float, Tag, Order>::Coeff() + x * term, x); }
+
+      static Float
+      Eval(const Float x)
+      { return Horner<Float, Tag, Order - 1>::Recurse(Polynomial<Float, Tag, Order>::Coeff(), x); }
+
+      static Float
+      EvalAlt(const Float x)
+      { return Horner<Float, Tag, Order - 1>::RecurseAlt(Polynomial<Float, Tag, Order>::Coeff(), x); }
+
+      //
+      static Float
+      Recurse(const Float term, const Float x, const Float y)
+      { return Horner<Float, Tag, Order - 1>::Recurse(term * x + Polynomial<Float, Tag, Order>::Coeff(y), x, y); }
+
+      static Float
+      Eval(const Float x, const Float y)
+      { return Horner<Float, Tag, Order - 1>::Recurse(Polynomial<Float, Tag, Order>::Coeff(y), x, y); }
+    };
 
 
   template<typename Float, class Tag>
-  struct Horner<Float, Tag, 0> {
-    static Float Recurse(const Float term, const Float x)
-    { return term*x + Polynomial<Float, Tag, 0>::Coeff(); }
-    static Float Eval(const Float x)
-    { return Polynomial<Float, Tag, 0>::Coeff(); }
-    //
-    static Float Recurse(const Float term, const Float x, const Float y)
-    { return term*x + Polynomial<Float, Tag, 0>::Coeff(y); }
-    static Float Eval(const Float x, const Float y)
-    { return Polynomial<Float, Tag, 0>::Coeff(y); }
-  };
+    struct Horner<Float, Tag, 0>
+    {
+      static Float
+      Recurse(const Float term, const Float x)
+      { return term * x + Polynomial<Float, Tag, 0>::Coeff(); }
+
+      static Float
+      Eval(const Float)
+      { return Polynomial<Float, Tag, 0>::Coeff(); }
+
+      //
+      static Float
+      Recurse(const Float term, const Float x, const Float y)
+      { return term * x + Polynomial<Float, Tag, 0>::Coeff(y); }
+
+      static Float
+      Eval(const Float, const Float y)
+      { return Polynomial<Float, Tag, 0>::Coeff(y); }
+    };
 
 
-#define HORNER_COEFF(_Tag_, _i_, _c_)  \
-  template<typename Float> struct Polynomial<Float, _Tag_, _i_> { static Float Coeff() { return Float(_c_); } }
-#define HORNER_COEFF2(_Tag_, _i_, _c_y_)  \
-  template<typename Float> struct Polynomial<Float, _Tag_, _i_> { static Float Coeff(const Float y) { return Float(_c_y_); } }
+#define HORNER_COEFF(_Tag_, _ord_, _c_)  \
+  template<typename Float> \
+    struct Polynomial<Float, _Tag_, _ord_> \
+    { \
+      static Float \
+      Coeff() \
+      { return Float(_c_); } \
+    }
+
+#define HORNER_COEFF2(_Tag_, _ord_, _c_y_)  \
+  template<typename Float> \
+    struct Polynomial<Float, _Tag_, _ord_> \
+    { \
+      static Float \
+      Coeff(const Float y) \
+      { return Float(_c_y_); } \
+    }
 
 
 #define HORNER0(F, x, c0)                                                F(c0)
