@@ -128,7 +128,7 @@ namespace utl {
     };
 
 
-  template<typename Float, int Branch>
+  template<typename Float, int Br>
     class Branch
     {
     public:
@@ -156,12 +156,12 @@ namespace utl {
 	static Float
 	LogRecursion(const Float x)
 	{
-          using LRI = LogRecursionImpl<Float, Branch, Order>;
+          using LRI = LogRecursionImpl<Float, Br, Order>;
           return LRI::Step(std::log(eSign * x));
         }
 
     private:
-      enum { eSign = 2 * Branch + 1 };
+      enum { eSign = 2 * Br + 1 };
     };
 
 
@@ -362,13 +362,13 @@ namespace utl {
       return Y5(
 	(Branch<d, 0>::BranchPointExpansion<8>(x)),
 	x < -0.367679,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Branch<d, 0>::BranchPointExpansion<10>(x))),
+	(Iter::Depth<1>::Recurse(x, Branch<d, 0>::BranchPointExpansion<10>(x))),
 	x < -0.311,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, 0, 1>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, 0, 1>::Approximation(x))),
 	x < 1.38,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, 0, 2>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, 0, 2>::Approximation(x))),
 	x < 236,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Branch<d, 0>::AsymptoticExpansion<6-1>(x)))
+	(Iter::Depth<1>::Recurse(x, Branch<d, 0>::AsymptoticExpansion<6-1>(x)))
       );
     }
 
@@ -382,17 +382,17 @@ namespace utl {
       return Y7(
 	(Branch<d, -1>::BranchPointExpansion<8>(x)),
 	x < -0.367579,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Branch<d, -1>::BranchPointExpansion<4>(x))),
+	(Iter::Depth<1>::Recurse(x, Branch<d, -1>::BranchPointExpansion<4>(x))),
 	x < -0.366079,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, -1, 7>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, -1, 7>::Approximation(x))),
 	x < -0.289379,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, -1, 4>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, -1, 4>::Approximation(x))),
 	x < -0.0509,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, -1, 5>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, -1, 5>::Approximation(x))),
 	x < -0.000131826,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Pade<d, -1, 6>::Approximation(x))),
+	(Iter::Depth<1>::Recurse(x, Pade<d, -1, 6>::Approximation(x))),
 	x < -6.30957e-31,
-	(Iterator<d, HalleyStep<d>>::Depth<1>::Recurse(x, Branch<d, -1>::LogRecursion<3>(x)))
+	(Iter::Depth<1>::Recurse(x, Branch<d, -1>::LogRecursion<3>(x)))
       );
     }
 

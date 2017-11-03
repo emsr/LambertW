@@ -36,12 +36,12 @@
 
   Examples:
 
-  ./lambertw 3.14     -->   1.073395661239825
-  ./lambertw -0.2     -->  -0.2591711018190738
-  ./lambertw 0 1      -->   0.5671432904097838
-  ./lambertw 0 0      -->   0
-  ./lambertw -1 -0.2  -->  -2.542641357773526
-  ./lambertw -1 -0.3  -->  -1.781337023421628
+  ./lambertw -x 3.14     -->   1.073395661239825
+  ./lambertw -x -0.2     -->  -0.2591711018190738
+  ./lambertw -x 0 1      -->   0.5671432904097838
+  ./lambertw -x 0 0      -->   0
+  ./lambertw -x -1 -0.2  -->  -2.542641357773526
+  ./lambertw -x -1 -0.3  -->  -1.781337023421628
 
 */
 
@@ -59,7 +59,10 @@ using namespace std;
 void
 Usage(const char* const argv[], const int argc = 0, const int index = -1)
 {
-  cout << "Usage: " << argv[0] << " [-f] [-p #] [-b #] -x #" << endl;
+  cout << "Usage: "
+       << argv[0]
+       << " [-f] [-p <precision>] [-b <branch>] -x <argument>"
+       << endl;
   if (argc) {
     int len = 0;
     string line;

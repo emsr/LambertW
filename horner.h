@@ -21,7 +21,7 @@ template<typename _ArgT, typename _Coef0, typename... _Coef>
 
 template<typename _ArgT, typename _Coef0>
   constexpr std::conditional_t<std::is_integral_v<_ArgT>, double, _ArgT>
-  horner_big_end(_ArgT __x, _Coef0 __c0)
+  horner_big_end(_ArgT, _Coef0 __c0)
   {
     using __arg_t = std::conditional_t<std::is_integral_v<_ArgT>, double, _ArgT>;
     return __arg_t{__c0};
