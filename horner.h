@@ -1,7 +1,7 @@
 
 #include <type_traits>
 
-#if __cpp_lib_type_trait_variable_templates >= 201510
+#if __cpp_lib_type_trait_variable_templates < 201510
 namespace std
 {
   template<typename _Tp>
